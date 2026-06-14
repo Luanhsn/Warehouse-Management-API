@@ -1,5 +1,7 @@
 package com.luanhsn.warehouse_management_api.controller;
 
+import com.luanhsn.warehouse_management_api.dto.ProductRequest;
+import com.luanhsn.warehouse_management_api.dto.ProductResponse;
 import com.luanhsn.warehouse_management_api.model.Product;
 import com.luanhsn.warehouse_management_api.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +17,18 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public List<Product> getAllProducts() {
+    public List<ProductResponse> getAllProducts() {
         return productService.getAllProducts();
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) {
+    public ProductResponse getProductById(@PathVariable Long id) {
         return productService.getProductById(id);
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.createProduct(product);
+    public ProductResponse createProduct(@RequestBody ProductRequest request) {
+        return productService.createProduct(request);
     }
 
     @DeleteMapping("/{id}")
@@ -35,7 +37,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        return productService.updateProduct(id, product);
+    public ProductResponse updateProduct(@PathVariable Long id, @RequestBody ProductRequest request) {
+        return productService.updateProduct(id, request);
     }
 }
