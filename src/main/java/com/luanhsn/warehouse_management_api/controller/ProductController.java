@@ -4,6 +4,7 @@ import com.luanhsn.warehouse_management_api.dto.ProductRequest;
 import com.luanhsn.warehouse_management_api.dto.ProductResponse;
 import com.luanhsn.warehouse_management_api.model.Product;
 import com.luanhsn.warehouse_management_api.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductResponse createProduct(@RequestBody ProductRequest request) {
+    public ProductResponse createProduct(@Valid @RequestBody ProductRequest request) {
         return productService.createProduct(request);
     }
 
@@ -37,7 +38,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ProductResponse updateProduct(@PathVariable Long id, @RequestBody ProductRequest request) {
+    public ProductResponse updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequest request) {
         return productService.updateProduct(id, request);
     }
 }
