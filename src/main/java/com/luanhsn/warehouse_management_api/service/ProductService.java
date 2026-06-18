@@ -11,12 +11,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service for product business logic.
+ * Handles conversion between model and DTOs, and database operations.
+ */
 @Service
 public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
 
+    /**
+     * Updates an existing product by ID.
+     * Throws ResourceNotFoundException if the product does not exist.
+     */
     public ProductResponse updateProduct(Long id, ProductRequest request) {
         Product existing = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
@@ -28,6 +36,9 @@ public class ProductService {
         return toResponse(productRepository.save(existing));
     }
 
+    /**
+     * Converts a ProductRequest to a Product entity.
+     */
     private Product toEntity(ProductRequest request) {
         Product product = new Product();
         product.setName(request.getName());
@@ -38,6 +49,9 @@ public class ProductService {
         return product;
     }
 
+    /**
+     * Converts a Product entity to a ProductResponse DTO.
+     */
     private ProductResponse toResponse(Product product) {
         ProductResponse response = new ProductResponse();
         response.setId(product.getId());
@@ -51,6 +65,9 @@ public class ProductService {
         return response;
     }
 
+    /**
+     * Returns all products from the database.
+     */
     public List<ProductResponse> getAllProducts() {
         return productRepository.findAll()
                 .stream()
@@ -58,17 +75,27 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Returns a single product by ID.
+     * Throws ResourceNotFoundException if the product does not exist.
+     */
     public ProductResponse getProductById(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
         return toResponse(product);
     }
 
+    /**
+     * Creates a new product and saves it to the database.
+     */
     public ProductResponse createProduct(ProductRequest request) {
         Product product = toEntity(request);
         return toResponse(productRepository.save(product));
     }
 
+    /**
+     * Deletes a product by ID.
+     */
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }

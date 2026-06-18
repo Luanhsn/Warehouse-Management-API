@@ -9,6 +9,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service for user authentication — registration and login.
+ */
 @Service
 public class AuthService {
 
@@ -24,6 +27,9 @@ public class AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    /**
+     * Registers a new user, hashes the password, and returns a JWT token.
+     */
     public String register(String username, String password) {
         User user = new User();
         user.setUsername(username);
@@ -33,6 +39,9 @@ public class AuthService {
         return jwtService.generateToken(username);
     }
 
+    /**
+     * Authenticates a user and returns a JWT token if credentials are valid.
+     */
     public String login(String username, String password) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
