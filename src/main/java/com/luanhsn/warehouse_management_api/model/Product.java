@@ -29,6 +29,10 @@ public class Product {
 
     private String sku;
 
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -57,6 +61,9 @@ public class Product {
     public String getSku() { return sku; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public Supplier getSupplier() {
+        return supplier;
+    }
 
     // Setters
     public void setId(Long id) { this.id = id; }
@@ -67,4 +74,7 @@ public class Product {
     public void setSku(String sku) { this.sku = sku; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
 }
