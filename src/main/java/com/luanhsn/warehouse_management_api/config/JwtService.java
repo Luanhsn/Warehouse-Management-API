@@ -2,6 +2,7 @@ package com.luanhsn.warehouse_management_api.config;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -13,7 +14,8 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private static final String SECRET = "warehouse-secret-key-must-be-at-least-256-bits!!";
+    @Value("${jwt.secret}")
+    private String SECRET;
     private static final long EXPIRATION = 86400000; // 24 hours
 
     /**
