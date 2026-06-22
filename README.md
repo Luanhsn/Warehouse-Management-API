@@ -14,8 +14,9 @@ A RESTful API for managing warehouse inventory, built with Java and Spring Boot.
 
 ## Features
 
-- Product CRUD (Create, Read, Update, Delete)
-- JWT-based Authentication (Register & Login)
+- Product CRUD
+- Supplier CRUD with Product relationship
+- JWT-based Authentication
 - Input Validation
 - Global Exception Handling
 - API Documentation via Swagger UI
@@ -95,6 +96,18 @@ http://localhost:8080/swagger-ui/index.html
 | DELETE | `/api/products/{id}` | Delete a product |
 
 > All product endpoints require a valid JWT token in the `Authorization: Bearer <token>` header.
+
+### Suppliers
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/suppliers` | Get all suppliers |
+| GET | `/api/suppliers/{id}` | Get supplier by ID |
+| POST | `/api/suppliers` | Create a new supplier |
+| PUT | `/api/suppliers/{id}` | Update a supplier |
+| DELETE | `/api/suppliers/{id}` | Delete a supplier |
+
+> All supplier endpoints require a valid JWT token.
 
 ## Authentication Flow
 
