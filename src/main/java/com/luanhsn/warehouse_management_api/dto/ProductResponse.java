@@ -11,6 +11,7 @@ public class ProductResponse {
     private String sku;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private SupplierResponse supplier;
 
     // Getters und Setters
 
@@ -22,6 +23,9 @@ public class ProductResponse {
     public String getSku() { return sku; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public SupplierResponse getSupplier() {
+        return supplier;
+    }
 
     public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }
@@ -31,4 +35,7 @@ public class ProductResponse {
     public void setSku(String sku) { this.sku = sku; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public void setSupplier(SupplierResponse supplier) {
+        this.supplier = supplier;
+    }
 }

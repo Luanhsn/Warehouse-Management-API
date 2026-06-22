@@ -2,9 +2,12 @@ package com.luanhsn.warehouse_management_api.service;
 
 import com.luanhsn.warehouse_management_api.dto.ProductRequest;
 import com.luanhsn.warehouse_management_api.dto.ProductResponse;
+import com.luanhsn.warehouse_management_api.dto.SupplierResponse;
 import com.luanhsn.warehouse_management_api.exception.ResourceNotFoundException;
 import com.luanhsn.warehouse_management_api.model.Product;
+import com.luanhsn.warehouse_management_api.model.Supplier;
 import com.luanhsn.warehouse_management_api.repository.ProductRepository;
+import com.luanhsn.warehouse_management_api.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,8 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private SupplierRepository supplierRepository;
 
     /**
      * Updates an existing product by ID.
@@ -46,6 +51,11 @@ public class ProductService {
         product.setQuantity(request.getQuantity());
         product.setPrice(request.getPrice());
         product.setSku(request.getSku());
+        if (request.getSupplierId() != null) {
+            Supplier supplier = supplierRepository.findById(request.getSupplierId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Supplier with id " + request.getSupplierId() + " not found"));
+            product.setSupplier(supplier);
+        }
         return product;
     }
 
@@ -62,6 +72,15 @@ public class ProductService {
         response.setSku(product.getSku());
         response.setCreatedAt(product.getCreatedAt());
         response.setUpdatedAt(product.getUpdatedAt());
+        if (product.getSupplier() != null) {
+            SupplierResponse supplierResponse = new SupplierResponse();
+            supplierResponse.setId(product.getSupplier().getId());
+            supplierResponse.setName(product.getSupplier().getName());
+            supplierResponse.setEmail(product.getSupplier().getEmail());
+            supplierResponse.setPhone(product.getSupplier().getPhone());
+            supplierResponse.setAddress(product.getSupplier().getAddress());
+            response.setSupplier(supplierResponse);
+        }
         return response;
     }
 
