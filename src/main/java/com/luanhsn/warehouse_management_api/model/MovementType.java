@@ -1,4 +1,6 @@
 package com.luanhsn.warehouse_management_api.model;
 
-public class StockMovemnt {
+public enum MovementType{
+    IN,
+    OUT
 }

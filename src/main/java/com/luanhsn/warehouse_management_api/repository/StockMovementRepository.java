@@ -1,4 +1,10 @@
 package com.luanhsn.warehouse_management_api.repository;
 
-public class StockMovementRepository {
+import com.luanhsn.warehouse_management_api.model.StockMovement;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface StockMovementRepository extends JpaRepository<StockMovement, Long> {
+    List<StockMovement> findByProductId(Long productId);
 }
