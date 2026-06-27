@@ -16,6 +16,7 @@ A RESTful API for managing warehouse inventory, built with Java and Spring Boot.
 
 - Product CRUD
 - Supplier CRUD with Product relationship
+- Stock Movement tracking (IN/OUT inventory history)
 - JWT-based Authentication
 - Input Validation
 - Global Exception Handling
@@ -108,6 +109,16 @@ http://localhost:8080/swagger-ui/index.html
 | DELETE | `/api/suppliers/{id}` | Delete a supplier |
 
 > All supplier endpoints require a valid JWT token.
+
+### Stock Movements
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/stock-movements` | Get all stock movements |
+| GET | `/api/stock-movements/product/{productId}` | Get movements for a specific product |
+| POST | `/api/stock-movements` | Record a new stock movement (IN/OUT) |
+
+> All stock movement endpoints require a valid JWT token.
 
 ## Authentication Flow
 
